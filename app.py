@@ -22,6 +22,8 @@ Songs(title='Crazy In Love', artist='Beyoncé', key='D-', tempo=100).save()
 Songs(title='Watermelon Sugar', artist='Harry Styles', key='C', tempo=95).save()
 Songs(title='How Deep Is Your Love', artist='Bee Gees', key='Eb', tempo=105).save()
 
+app = Flask(__name__)
+
 @app.route('/songs/', methods=['GET', 'POST'])
 @app.route('/songs/<id>', methods=['GET', 'PUT', 'DELETE'])
 def endpoint(id=None):
@@ -47,3 +49,5 @@ def endpoint(id=None):
     if request.method == 'DELETE':
         Songs.delete().where(Songs.id == id).execute()
         return "Song " + str(song.title) + " deleted."
+
+app.run(debug=True, port=3333)
